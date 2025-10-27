@@ -38,8 +38,8 @@
             <h1 class="text-3xl font-bold text-white mb-2">四十八色開運寓意</h1>
             <p class="text-blue-300 mb-8">抽出今日屬於您的靈根吉吉開運色</p>
             <div class="flex justify-center items-center mb-4">
-                <!-- 這個 div 會顯示背景色 - 寬高已修改為 h-96 --><div id="display-box" class="w-full h-96 rounded-lg border-4 border-blue-800 shadow-inner overflow-hidden flex items-center justify-center bg-blue-800 color-display shadow-lg shadow-cyan-400/20">
-                    <!-- 圖片會顯示在顏色上層 - object-cover 已改為 object-contain --><img id="image-box" src="" alt="抽籤圖片" class="w-full h-full object-contain image-display opacity-0">
+                <!-- *** 修改：初始高度改為 h-12，並加入 transition 屬性 *** --><div id="display-box" class="w-full h-12 rounded-lg border-4 border-blue-800 shadow-inner overflow-hidden flex items-center justify-center bg-blue-800 color-display shadow-lg shadow-cyan-400/20 transition-[height] duration-500 ease-in-out">
+                    <!-- 圖片會顯示在顏色上層 - object-cover 已改為 object-contain --><!-- *** 修改：新增 hidden class，抽籤過程不顯示圖片，只顯示色塊 *** --><img id="image-box" src="" alt="抽籤圖片" class="w-full h-full object-contain image-display opacity-0 hidden">
                 </div>
             </div>
             <p id="color-name" class="text-2xl font-semibold h-10"></p>
@@ -53,7 +53,7 @@
         <!-- 步驟三：抽籤結果 (顏色和圖片合併) --><div id="step3" class="hidden">
             <!-- 標頭已移除 --><div class="flex justify-center items-center mb-4">
                 <!-- 這個 div 會顯示背景色 - 寬高已修改為 h-96 --><div id="result-display-box" class="w-full h-96 rounded-lg border-4 border-blue-800 shadow-inner overflow-hidden flex items-center justify-center bg-blue-800 shadow-lg shadow-cyan-400/20">
-                    <!-- 圖片會顯示在顏色上層 - object-cover 已改為 object-contain --><img id="result-image-box" src="" alt="抽籤結果圖片" class="w-full h-full object-contain">
+                    <!-- 圖片會顯示在顏色上層 - object-cover 已改為 object-contain --><!-- *** 這裡會載入唯一的結果圖片 *** --><img id="result-image-box" src="" alt="抽籤結果圖片" class="w-full h-full object-contain">
                 </div>
             </div>
             <p id="result-message" class="text-2xl font-bold text-white mb-2"></p>
@@ -125,7 +125,7 @@
             { id: 48, name: "黑", hex: "#000000", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-48", imageUrl: "image/48_48.gif" },
         ];
 
-        // --- 程式邏輯區 ---
+            // --- 程式邏輯區 ---
         document.addEventListener('DOMContentLoaded', function() {
             const startButton = document.getElementById('startButton');
             const confirmButton = document.getElementById('confirmButton');
@@ -149,32 +149,43 @@
             let finalColor;
 
             // 更新顏色和圖片顯示
+            // *** 修改：移除 imageBox 的更新邏輯，只更新色塊和名稱 ***
             function updateDisplay(color) {
                 displayBox.style.backgroundColor = color.hex; // *** 修改 ***
                 colorName.textContent = color.name;
-                imageBox.src = color.imageUrl;
-                imageBox.onload = () => {
-                    imageBox.style.opacity = '1';
-                };
-                if (!color.imageUrl) {
-                    imageBox.style.opacity = '0';
-                }
+                // imageBox.src = color.imageUrl; // <-- 已移除
+                // imageBox.onload = () => { // <-- 已移除
+                //     imageBox.style.opacity = '1';
+                // };
+                // if (!color.imageUrl) { // <-- 已移除
+                //     imageBox.style.opacity = '0';
+                // }
             }
 
             // 開始抽籤
             if (startButton) {
                 startButton.addEventListener('click', () => {
                     step1.classList.add('hidden');
-                    step2.classList.remove('hidden');
+                    step2.classList.remove('hidden'); // 顯示步驟二 (此時 display-box 仍為 h-12)
                     
-                    rotationInterval = setInterval(() => {
-                        const randomColor = colors[Math.floor(Math.random() * colors.length)];
-                        updateDisplay(randomColor);
-                    }, 70);
-
+                    // *** 觸發高度動畫 ***
+                    // 使用 setTimeout 確保瀏覽器有時間渲染 h-12 的狀態，再觸發動畫
                     setTimeout(() => {
-                        document.getElementById('confirm-button-wrapper').style.opacity = '1';
-                    }, 2000);
+                        displayBox.classList.remove('h-12');
+                        displayBox.classList.add('h-96'); // 執行動畫到 h-96
+
+                        // *** 等待動畫 (500ms) 結束後 ***
+                        setTimeout(() => {
+                            // 1. 開始輪播
+                            rotationInterval = setInterval(() => {
+                                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                                updateDisplay(randomColor);
+                            }, 70);
+
+                            // 2. 顯示「抽」按鈕
+                            document.getElementById('confirm-button-wrapper').style.opacity = '1';
+                        }, 500); // 必須等於 CSS transition 的 duration
+                    }, 10); // 短暫延遲以觸發 transition
                 });
             }
 
@@ -214,7 +225,7 @@
                 step3.classList.add('fade-in');
 
                 resultDisplayBox.style.backgroundColor = color.hex; // *** 修改 ***
-                resultImageBox.src = color.imageUrl;
+                resultImageBox.src = color.imageUrl; // *** 只有在這裡才載入圖片 ***
                 resultMessage.textContent = `第 ${color.id} 色：${color.name}`; // 已改回您的格式
                 
                 // --- 籤詩顯示邏輯更新 ---
@@ -247,13 +258,18 @@
 
                     displayBox.style.backgroundColor = ''; // *** 修改 ***
                     colorName.textContent = '';
-                    imageBox.src = '';
-                    imageBox.style.opacity = '0';
+                    // imageBox.src = ''; // <-- 已移除
+                    // imageBox.style.opacity = '0'; // <-- 已移除
                     fortuneText.innerHTML = ''; // 再抽一次時清空籤詩
+
+                    // *** 新增：重置 display-box 的高度 ***
+                    displayBox.classList.remove('h-96');
+                    displayBox.classList.add('h-12');
                 });
             }
         });
     </script>
 </body>
 </html>
+
 
