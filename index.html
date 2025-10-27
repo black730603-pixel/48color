@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>四十八色開運寓意</title>
+    <!-- 引入 Tailwind CSS，提供更豐富的美化效果 --><script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* 自訂動畫效果 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+        .color-display {
+            transition: background-color 0.1s linear;
+        }
+        .image-display {
+            transition: opacity 0.1s linear;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-950 to-indigo-950 flex items-center justify-center min-h-screen font-sans text-gray-200">
+
+    <div id="fortune-container" class="w-full max-w-md mx-auto bg-blue-900 rounded-2xl shadow-2xl shadow-blue-500/20 p-8 text-center">
+        
+        <!-- 標題和副標題已移入步驟一和步驟二 --><!-- 步驟一：開始按鈕 --><div id="step1">
+            <h1 class="text-3xl font-bold text-white mb-2">四十八色開運寓意</h1>
+            <p class="text-blue-300 mb-8">抽出今日屬於您的靈根吉吉開運色</p>
+            <button id="startButton" class="w-full bg-indigo-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-indigo-400 focus:outline-none focus:ring-4 focus:ring-indigo-600 transition-transform transform hover:scale-105">
+                開始洗牌
+            </button>
+        </div>
+
+        <!-- 步驟二：抽籤過程 (顏色和圖片合併) --><div id="step2" class="hidden">
+            <h1 class="text-3xl font-bold text-white mb-2">四十八色開運寓意</h1>
+            <p class="text-blue-300 mb-8">抽出今日屬於您的靈根吉吉開運色</p>
+            <div class="flex justify-center items-center mb-4">
+                <!-- 這個 div 會顯示背景色 - 寬高已修改為 h-96 --><div id="display-box" class="w-full h-96 rounded-lg border-4 border-blue-800 shadow-inner overflow-hidden flex items-center justify-center bg-blue-800 color-display shadow-lg shadow-cyan-400/20">
+                    <!-- 圖片會顯示在顏色上層 - object-cover 已改為 object-contain --><img id="image-box" src="" alt="抽籤圖片" class="w-full h-full object-contain image-display opacity-0">
+                </div>
+            </div>
+            <p id="color-name" class="text-2xl font-semibold h-10"></p>
+            <div id="confirm-button-wrapper" class="mt-6" style="opacity: 0; transition: opacity 0.5s ease-in;">
+                <button id="confirmButton" class="w-full bg-green-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-green-400 focus:outline-none focus:ring-4 focus:ring-green-600 transition-transform transform hover:scale-105">
+                    抽
+                </button>
+            </div>
+        </div>
+
+        <!-- 步驟三：抽籤結果 (顏色和圖片合併) --><div id="step3" class="hidden">
+            <!-- 標頭已移除 --><div class="flex justify-center items-center mb-4">
+                <!-- 這個 div 會顯示背景色 - 寬高已修改為 h-96 --><div id="result-display-box" class="w-full h-96 rounded-lg border-4 border-blue-800 shadow-inner overflow-hidden flex items-center justify-center bg-blue-800 shadow-lg shadow-cyan-400/20">
+                    <!-- 圖片會顯示在顏色上層 - object-cover 已改為 object-contain --><img id="result-image-box" src="" alt="抽籤結果圖片" class="w-full h-full object-contain">
+                </div>
+            </div>
+            <p id="result-message" class="text-2xl font-bold text-white mb-2"></p>
+            
+            <!-- 籤詩顯示區塊 - 已修改為 DIV 並更新樣式 --><div id="fortune-text" class="text-xl text-blue-200 font-serif leading-relaxed my-6 p-4 bg-blue-950/50 rounded-lg border border-blue-800 min-h-[5rem]"></div>
+            
+            <a id="moreInfoButton" href="#" target="_blank" class="inline-block w-full bg-blue-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring-4 focus:ring-blue-600 transition-transform transform hover:scale-105">
+                查看詳細說明
+            </a>
+            <button id="restartButton" class="mt-4 w-full bg-gray-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-gray-500 focus:outline-none focus:ring-4 focus:ring-gray-600 transition-transform transform hover:scale-105">
+                再抽一次
+            </button>
+        </div>
+
+        <!-- 頁尾文字 --><p class="text-xs text-blue-400 mt-8">靈根吉吉開運好物製販所 2025年出品</p>
+    </div>
+
+    <script>
+        // --- 設定區 ---
+        // 籤詩(fortune)已被修改為陣列格式，以支援兩句兩句顯示
+        const colors = [
+            { id: 1, name: "深紅", hex: "#a50c37", fortune: ["烈焰燃空衝九霄，雄心壯志逐狂濤。", "龍騰四海時來運，莫負流光自折腰。"], url: "https://lingamjiji.com/2025/05/26/48color_01/", imageUrl: "image/48_01.gif" },
+            { id: 2, name: "紅", hex: "#c41e0f", fortune: ["丹心不染浮雲色，熱血猶燃萬古情。", "福至門開行坦道，英才步步上高程。"], url: "https://lingamjiji.com/2025/05/27/48color_02/", imageUrl: "image/48_02.gif" },
+            { id: 3, name: "朱紅", hex: "#da3a07", fortune: ["曦照紅霞千嶂暖，鴻運當頭莫自疑。", "風捲長帆隨意舉，狂歌一曲震天時。"], url: "https://lingamjiji.com/2025/07/10/48color_03/", imageUrl: "image/48_03.gif" },
+            { id: 4, name: "橘", hex: "#e36d06", fortune: ["旭日初昇迎喜氣，金風吹穗報豐年。", "心寬自有通達路，笑對風霜福壽延。"], url: "https://lingamjiji.com/2025/07/10/48color_04/", imageUrl: "image/48_04.gif" },
+            { id: 5, name: "亮橘", hex: "#e99902", fortune: ["東嶺朝暉開瑞氣，門庭福至財如潮。", "胸襟坦蕩迎機遇，春色年年滿遠橋。"], url: "https://lingamjiji.com/2025/07/12/48color_05/", imageUrl: "image/48_05.gif" },
+            { id: 6, name: "向日葵", hex: "#ebcd1a", fortune: ["逐日昂然無畏懼，金輝灑遍滿蒼穹。", "心誠則靈通大道，福至榮華歲歲豐。"], url: "https://lingamjiji.com/2025/07/12/48color_06/", imageUrl: "image/48_06.gif" },
+            { id: 7, name: "黃", hex: "#e9e203", fortune: ["厚土藏金盈萬象，霞光燦爛啟前程。", "天時地利相扶助，富貴榮華正可成。"], url: "https://lingamjiji.com/2025/07/12/48color_07/", imageUrl: "image/48_07.gif" },
+            { id: 8, name: "黃綠", hex: "#c5e005", fortune: ["草木逢春生意滿，風和日麗好時光。", "但須防範多變數，穩步前行莫徬徨。"], url: "https://lingamjiji.com/2025/07/12/48color_08/", imageUrl: "image/48_08.gif" },
+            { id: 9, name: "綠", hex: "#01854d", fortune: ["青松不老迎霜立，福祿相隨樂太平。", "和氣自生財路廣，歲歲安康歲歲榮。"], url: "https://lingamjiji.com/2025/07/12/48color_09/", imageUrl: "image/48_09.gif" },
+            { id: 10, name: "鉻綠", hex: "#08655a", fortune: ["蒼嶺煙波風雨急，枝頭未穩莫妄行。", "但憑智策思機變，方得雲開日再明。"], url: "https://lingamjiji.com/2025/07/12/48color_10/", imageUrl: "image/48_10.gif" },
+            { id: 11, name: "鉻藍", hex: "#0e4eca", fortune: ["澄波映月無聲動，靜水深流養萬機。", "但待雲開天朗日，光風霽月自相宜。"], url: "https://lingamjiji.com/2025/07/12/48color_11/", imageUrl: "image/48_11.gif" },
+            { id: 12, name: "藍", hex: "#0141ad", fortune: ["浩渺江天雲影渡，乘風破浪志無窮。", "青霄萬里憑君去，天高地闊任長虹。"], url: "https://lingamjiji.com/2025/07/12/48color_12/", imageUrl: "image/48_12.gif" },
+            { id: 13, name: "紫", hex: "#472569", fortune: ["紫氣東來祥瑞至，天星拱照貴人臨。", "榮華自有青雲路，福祿綿延萬世新。"], url: "https://lingamjiji.com/2025/07/13/48color_13/", imageUrl: "image/48_13.gif" },
+            { id: 14, name: "紅紫", hex: "#d61f5f", fortune: ["花開並蒂香盈袖，運勢當頭莫自疑。", "風雨過後生紫氣，榮華自可歲相依。"], url: "https://lingamjiji.com/2025/07/13/48color_14/", imageUrl: "image/48_14.gif" },
+            { id: 15, name: "牡丹粉", hex: "#f13fd9", fortune: ["牡丹富貴人皆仰，時至福來運自臨。", "姻緣美滿多和順，家宅康寧笑語深。"], url: "https://lingamjiji.com/2025/07/13/48color_15/", imageUrl: "image/48_15.gif" },
+            { id: 16, name: "淡粉", hex: "#fbdade", fortune: ["桃花細雨春風暖，心願初成正及時。", "但守初心勤向學，福來如水不須疑。"], url: "https://lingamjiji.com/2025/07/13/48color_16/", imageUrl: "image/48_16.gif" },
+            { id: 17, name: "淡橘", hex: "#fea757", fortune: ["晨光微露輕風暖，步步生機運自來。", "但須穩行防險阻，時機一到莫徘徊。"], url: "https://lingamjiji.com/2025/07/13/48color_17/", imageUrl: "image/48_17.gif" },
+            { id: 18, name: "藤黃", hex: "#e7bb5d", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://lingamjiji.com/2025/07/13/48color_18/", imageUrl: "image/48_18.gif" },
+            { id: 19, name: "奶油", hex: "#efedb0", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-19", imageUrl: "image/48_19.gif" },
+            { id: 20, name: "梔子綠", hex: "#89d683", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-20", imageUrl: "image/48_20.gif" },
+            { id: 21, name: "冰綠", hex: "#85d8c1", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-21", imageUrl: "image/48_21.gif" },
+            { id: 22, name: "水藍", hex: "#65d5e1", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-22", imageUrl: "image/48_22.gif" },
+            { id: 23, name: "勿忘草", hex: "#99c4fe", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-23", imageUrl: "image/48_23.gif" },
+            { id: 24, name: "紫藤", hex: "#caa0dc", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-24", imageUrl: "image/48_24.gif" },
+            { id: 25, name: "珊瑚紅", hex: "#ff4041", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-25", imageUrl: "image/48_25.gif" },
+            { id: 26, name: "胡蘿蔔", hex: "#ee7216", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-26", imageUrl: "image/48_26.gif" },
+            { id: 27, name: "山吹", hex: "#f59d1e", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-27", imageUrl: "image/48_27.gif" },
+            { id: 28, name: "檸檬黃", hex: "#fefc39", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-28", imageUrl: "image/48_28.gif" },
+            { id: 29, name: "祖母綠", hex: "#00681a", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-29", imageUrl: "image/48_29.gif" },
+            { id: 30, name: "藍綠", hex: "#137e6e", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-30", imageUrl: "image/48_30.gif" },
+            { id: 31, name: "淺蔥", hex: "#089b82", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-31", imageUrl: "image/48_31.gif" },
+            { id: 32, name: "天藍", hex: "#20a9dd", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-32", imageUrl: "image/48_32.gif" },
+            { id: 33, name: "堇紫", hex: "#704195", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-33", imageUrl: "image/48_33.gif" },
+            { id: 34, name: "桃", hex: "#fea2c3", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-34", imageUrl: "image/48_34.gif" },
+            { id: 35, name: "赤茶", hex: "#6d2214", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-35", imageUrl: "image/48_35.gif" },
+            { id: 36, name: "焦茶", hex: "#442d20", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-36", imageUrl: "image/48_36.gif" },
+            { id: 37, name: "茶", hex: "#693e1f", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-37", imageUrl: "image/48_37.gif" },
+            { id: 38, name: "琥珀", hex: "#cc8903", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-38", imageUrl: "image/48_38.gif" },
+            { id: 39, name: "赭", hex: "#d57b03", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-39", imageUrl: "image/48_39.gif" },
+            { id: 40, name: "橄欖綠", hex: "#46541d", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-40", imageUrl: "image/48_40.gif" },
+            { id: 41, name: "孔雀綠", hex: "#095454", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-41", imageUrl: "image/48_41.gif" },
+            { id: 42, name: "孔雀藍", hex: "#004859", fortune: ["鳳華翩躚開萬象，晴空浩渺見天關。", "心懷皓月凌霄去，步步生蓮上玉山。"], url: "https://lingamjiji.com/2025/07/26/48color_42/", imageUrl: "image/48_42.gif" },
+            { id: 43, name: "靛青", hex: "#4c0082", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-43", imageUrl: "image/48_43.gif" },
+            { id: 44, name: "酒紅", hex: "#591726", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-44", imageUrl: "image/48_44.gif" },
+            { id: 45, name: "白", hex: "#ffffff", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-45", imageUrl: "image/48_45.gif" },
+            { id: 46, name: "銀鼠", hex: "#9a9a9a", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-46", imageUrl: "image/48_46.gif" },
+            { id: 47, name: "鼠", hex: "#5c5c5c", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-47", imageUrl: "image/48_47.gif" },
+            { id: 48, name: "黑", hex: "#000000", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-48", imageUrl: "image/48_48.gif" },
+        ];
+
+        // --- 程式邏輯區 ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const startButton = document.getElementById('startButton');
+            const confirmButton = document.getElementById('confirmButton');
+            const restartButton = document.getElementById('restartButton');
+            
+            const step1 = document.getElementById('step1');
+            const step2 = document.getElementById('step2');
+            const step3 = document.getElementById('step3');
+
+            const displayBox = document.getElementById('display-box'); // *** 修改 ***
+            const imageBox = document.getElementById('image-box');
+            const colorName = document.getElementById('color-name');
+            
+            const resultDisplayBox = document.getElementById('result-display-box'); // *** 修改 ***
+            const resultImageBox = document.getElementById('result-image-box');
+            const resultMessage = document.getElementById('result-message');
+            const fortuneText = document.getElementById('fortune-text');
+            const moreInfoButton = document.getElementById('moreInfoButton');
+
+            let rotationInterval;
+            let finalColor;
+
+            // 更新顏色和圖片顯示
+            function updateDisplay(color) {
+                displayBox.style.backgroundColor = color.hex; // *** 修改 ***
+                colorName.textContent = color.name;
+                imageBox.src = color.imageUrl;
+                imageBox.onload = () => {
+                    imageBox.style.opacity = '1';
+                };
+                if (!color.imageUrl) {
+                    imageBox.style.opacity = '0';
+                }
+            }
+
+            // 開始抽籤
+            if (startButton) {
+                startButton.addEventListener('click', () => {
+                    step1.classList.add('hidden');
+                    step2.classList.remove('hidden');
+                    
+                    rotationInterval = setInterval(() => {
+                        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                        updateDisplay(randomColor);
+                    }, 70);
+
+                    setTimeout(() => {
+                        document.getElementById('confirm-button-wrapper').style.opacity = '1';
+                    }, 2000);
+                });
+            }
+
+            // 確定抽籤
+            if(confirmButton) {
+                confirmButton.addEventListener('click', () => {
+                    clearInterval(rotationInterval);
+                    document.getElementById('confirm-button-wrapper').style.display = 'none';
+
+                    finalColor = colors[Math.floor(Math.random() * colors.length)];
+
+                    let slowdownTime = 100;
+                    const slowDown = () => {
+                        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                        updateDisplay(randomColor);
+                        
+                        slowdownTime *= 1.25;
+                        
+                        if (slowdownTime < 700) {
+                            setTimeout(slowDown, slowdownTime);
+                        } else {
+                            updateDisplay(finalColor);
+
+                            setTimeout(() => {
+                                displayResult(finalColor);
+                            }, 500);
+                        }
+                    };
+                    slowDown();
+                });
+            }
+
+            // 顯示最終結果
+            function displayResult(color) {
+                step2.classList.add('hidden');
+                step3.classList.remove('hidden');
+                step3.classList.add('fade-in');
+
+                resultDisplayBox.style.backgroundColor = color.hex; // *** 修改 ***
+                resultImageBox.src = color.imageUrl;
+                resultMessage.textContent = `第 ${color.id} 色：${color.name}`; // 已改回您的格式
+                
+                // --- 籤詩顯示邏輯更新 ---
+                fortuneText.innerHTML = ''; // 清空舊內容
+                if (Array.isArray(color.fortune)) {
+                    // 將陣列中的每一行/每一組詩句，轉換成一個 <p> 標籤
+                    const htmlContent = color.fortune.map(line => 
+                        `<p class="my-1">${line}</p>` // my-1 增加一點行距
+                    ).join('');
+                    fortuneText.innerHTML = htmlContent;
+                } else {
+                    // 備用：如果資料不是陣列，直接顯示
+                    fortuneText.innerHTML = `<p>${color.fortune}</p>`;
+                }
+                // --- 籤詩邏輯結束 ---
+
+                moreInfoButton.href = color.url;
+            }
+
+            // 再抽一次
+            if (restartButton) {
+                restartButton.addEventListener('click', () => {
+                    step3.classList.add('hidden');
+                    step3.classList.remove('fade-in');
+                    step1.classList.remove('hidden');
+
+                    const confirmWrapper = document.getElementById('confirm-button-wrapper');
+                    confirmWrapper.style.opacity = '0';
+                    confirmWrapper.style.display = 'block';
+
+                    displayBox.style.backgroundColor = ''; // *** 修改 ***
+                    colorName.textContent = '';
+                    imageBox.src = '';
+                    imageBox.style.opacity = '0';
+                    fortuneText.innerHTML = ''; // 再抽一次時清空籤詩
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+
