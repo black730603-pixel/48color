@@ -38,11 +38,11 @@
             <h1 class="text-3xl font-bold text-white mb-2">四十八色開運寓意</h1>
             <p class="text-blue-300 mb-8">抽出今日屬於您的靈根吉吉開運色</p>
             <div class="flex justify-center items-center mb-4">
-                <!-- *** 修改：動畫時間改為 2000ms (2秒) *** --><div id="display-box" class="w-full h-12 rounded-lg border-4 border-blue-800 shadow-inner overflow-hidden flex items-center justify-center bg-blue-800 color-display shadow-lg shadow-cyan-400/20 transition-[height] duration-[2000ms] ease-in-out">
-                    <!-- 圖片會顯示在顏色上層 - object-cover 已改為 object-contain --><!-- *** 修改：新增 hidden class，抽籤過程不顯示圖片，只顯示色塊 *** --><img id="image-box" src="" alt="抽籤圖片" class="w-full h-full object-contain image-display opacity-0 hidden">
+                <!-- 顯示框 (顏色+圖片) --><div id="display-box" class="w-full h-12 rounded-lg border-4 border-blue-800 shadow-inner overflow-hidden flex items-center justify-center bg-blue-800 color-display shadow-lg shadow-cyan-400/20 transition-[height] duration-[2000ms] ease-in-out">
+                    <!-- 圖片會顯示在顏色上層 - object-cover 已改為 object-contain --><img id="image-box" src="" alt="抽籤圖片" class="w-full h-full object-contain image-display opacity-0 hidden">
                 </div>
             </div>
-            <p id="color-name" class="text-2xl font-semibold h-10"></p>
+            <!-- *** 修改：為此標籤添加 'hidden' class，在洗牌時隱藏顏色名稱 *** --><p id="color-name" class="text-2xl font-semibold h-10 hidden"></p>
             <div id="confirm-button-wrapper" class="mt-6" style="opacity: 0; transition: opacity 0.5s ease-in;">
                 <button id="confirmButton" class="w-full bg-green-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-green-400 focus:outline-none focus:ring-4 focus:ring-green-600 transition-transform transform hover:scale-105">
                     抽
@@ -93,36 +93,36 @@
             { id: 16, name: "淡粉", hex: "#fbdade", fortune: ["桃花細雨春風暖，心願初成正及時。", "但守初心勤向學，福來如水不須疑。"], url: "https://lingamjiji.com/2025/07/13/48color_16/", imageUrl: "image/48_16.gif" },
             { id: 17, name: "淡橘", hex: "#fea757", fortune: ["晨光微露輕風暖，步步生機運自來。", "但須穩行防險阻，時機一到莫徘徊。"], url: "https://lingamjiji.com/2025/07/13/48color_17/", imageUrl: "image/48_17.gif" },
             { id: 18, name: "藤黃", hex: "#e7bb5d", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://lingamjiji.com/2025/07/13/48color_18/", imageUrl: "image/48_18.gif" },
-            { id: 19, name: "奶油", hex: "#efedb0", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-19", imageUrl: "image/48_19.gif" },
-            { id: 20, name: "梔子綠", hex: "#89d683", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-20", imageUrl: "image/48_20.gif" },
-            { id: 21, name: "冰綠", hex: "#85d8c1", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-21", imageUrl: "image/48_21.gif" },
-            { id: 22, name: "水藍", hex: "#65d5e1", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-22", imageUrl: "image/48_22.gif" },
-            { id: 23, name: "勿忘草", hex: "#99c4fe", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-23", imageUrl: "image/48_23.gif" },
-            { id: 24, name: "紫藤", hex: "#caa0dc", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-24", imageUrl: "image/48_24.gif" },
-            { id: 25, name: "珊瑚紅", hex: "#ff4041", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-25", imageUrl: "image/48_25.gif" },
-            { id: 26, name: "胡蘿蔔", hex: "#ee7216", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-26", imageUrl: "image/48_26.gif" },
-            { id: 27, name: "山吹", hex: "#f59d1e", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-27", imageUrl: "image/48_27.gif" },
-            { id: 28, name: "檸檬黃", hex: "#fefc39", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-28", imageUrl: "image/48_28.gif" },
-            { id: 29, name: "祖母綠", hex: "#00681a", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-29", imageUrl: "image/48_29.gif" },
-            { id: 30, name: "藍綠", hex: "#137e6e", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-30", imageUrl: "image/48_30.gif" },
-            { id: 31, name: "淺蔥", hex: "#089b82", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-31", imageUrl: "image/48_31.gif" },
-            { id: 32, name: "天藍", hex: "#20a9dd", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-32", imageUrl: "image/48_32.gif" },
-            { id: 33, name: "堇紫", hex: "#704195", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-33", imageUrl: "image/48_33.gif" },
-            { id: 34, name: "桃", hex: "#fea2c3", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-34", imageUrl: "image/48_34.gif" },
-            { id: 35, name: "赤茶", hex: "#6d2214", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-35", imageUrl: "image/48_35.gif" },
-            { id: 36, name: "焦茶", hex: "#442d20", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-36", imageUrl: "image/48_36.gif" },
-            { id: 37, name: "茶", hex: "#693e1f", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-37", imageUrl: "image/48_37.gif" },
-            { id: 38, name: "琥珀", hex: "#cc8903", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-38", imageUrl: "image/48_38.gif" },
-            { id: 39, name: "赭", hex: "#d57b03", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-39", imageUrl: "image/48_39.gif" },
-            { id: 40, name: "橄欖綠", hex: "#46541d", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-40", imageUrl: "image/48_40.gif" },
-            { id: 41, name: "孔雀綠", hex: "#095454", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-41", imageUrl: "image/48_41.gif" },
+            { id: 19, name: "奶油", hex: "#efedb0", fortune: ["柔光暖日添祥瑞，步步安然少憂驚。", "隨遇而安知足樂，福來無盡似春風。"], url: "https://lingamjiji.com/2025/07/13/48color_19/", imageUrl: "image/48_19.gif" },
+            { id: 20, name: "梔子綠", hex: "#89d683", fortune: ["葉茂花繁盈秀色，運平時泰不多憂。", "但須小心防細險，靜守機緣步步收。"], url: "https://lingamjiji.com/2025/07/13/48color_20/", imageUrl: "image/48_20.gif" },
+            { id: 21, name: "冰綠", hex: "#85d8c1", fortune: ["清泉冷翠潤千里，貴人相助福盈門。", "但憑守拙勤耕作，財運自來步步昇。"], url: "https://lingamjiji.com/2025/07/13/48color_21/", imageUrl: "image/48_21.gif" },
+            { id: 22, name: "水藍", hex: "#65d5e1", fortune: ["水潤青天雲影淡，清風徐來運長存。", "無憂無慮安康度，歲歲年年福滿門。"], url: "https://lingamjiji.com/2025/07/13/48color_22/", imageUrl: "image/48_22.gif" },
+            { id: 23, name: "勿忘草", hex: "#99c4fe", fortune: ["幽香自有知音賞，心念誠時福自來。", "但守初心堅信志，莫因小阻亂安排。"], url: "https://lingamjiji.com/2025/07/13/48color_23/", imageUrl: "image/48_23.gif" },
+            { id: 24, name: "紫藤", hex: "#caa0dc", fortune: ["藤繞高樓須耐久，福來緩緩莫心焦。", "一步一登終有日，貴人指點上雲霄。"], url: "https://lingamjiji.com/2025/07/13/48color_24/", imageUrl: "image/48_24.gif" },
+            { id: 25, name: "珊瑚紅", hex: "#ff4041", fortune: ["霞染珊瑚光燦爛，時來運轉正逢春。", "財星高照添富貴，一路繁華步步新。"], url: "https://lingamjiji.com/2025/07/25/48color_25/", imageUrl: "image/48_25.gif" },
+            { id: 26, name: "胡蘿蔔", hex: "#ee7216", fortune: ["金風送爽豐年至，粒粒耕耘歲歲豐。", "但待時機多收穫，滿庭芳氣醉人濃。"], url: "https://lingamjiji.com/2025/07/25/48color_26/", imageUrl: "image/48_26.gif" },
+            { id: 27, name: "山吹", hex: "#f59d1e", fortune: ["山花爛漫春光滿，財運通達步步榮。", "但須防範細小事，行穩方能達高程。"], url: "https://lingamjiji.com/2025/07/25/48color_27/", imageUrl: "image/48_27.gif" },
+            { id: 28, name: "檸檬黃", hex: "#fefc39", fortune: ["清香一縷添生氣，財祿盈門運正濃。", "但防小人須謹慎，修心養性守初衷。"], url: "https://lingamjiji.com/2025/07/25/48color_28/", imageUrl: "image/48_28.gif" },
+            { id: 29, name: "祖母綠", hex: "#00681a", fortune: ["翠色盈盈藏富貴，時來運轉莫遲疑。", "天時地利皆佑汝，一舉青雲正可期。"], url: "https://lingamjiji.com/2025/07/25/48color_29/", imageUrl: "image/48_29.gif" },
+            { id: 30, name: "藍綠", hex: "#137e6e", fortune: ["水映青山藏遠勢，沉潛靜待運時開。", "須防困阻多忍耐，終得春風滿面來。"], url: "https://lingamjiji.com/2025/07/25/48color_30/", imageUrl: "image/48_30.gif" },
+            { id: 31, name: "淺蔥", hex: "#089b82", fortune: ["微風吹拂青蔥色，時運雖平亦安康。", "但守本心行穩步，終有貴人送吉祥。"], url: "https://lingamjiji.com/2025/07/25/48color_31/", imageUrl: "image/48_31.gif" },
+            { id: 32, name: "天藍", hex: "#20a9dd", fortune: ["天高雲淡風光好，萬里晴空運勢長。", "但憑勤奮修身德，財福雙全樂未央。"], url: "https://lingamjiji.com/2025/07/25/48color_32/", imageUrl: "image/48_32.gif" },
+            { id: 33, name: "堇紫", hex: "#704195", fortune: ["幽蘭自有春風度，靜待花開時運來。", "莫急莫躁心自穩，貴人扶助上高臺。"], url: "https://lingamjiji.com/2025/07/25/48color_33/", imageUrl: "image/48_33.gif" },
+            { id: 34, name: "桃", hex: "#fea2c3", fortune: ["桃花滿樹春風暖，情緣美滿福自來。", "財祿雙收心願遂，歲歲安康笑顏開。"], url: "https://lingamjiji.com/2025/07/25/48color_34/", imageUrl: "image/48_34.gif" },
+            { id: 35, name: "赤茶", hex: "#6d2214", fortune: ["沉穩內藏千鈞力，運勢徐來莫躁心。", "踏實勤奮多積善，天開雲朗日光臨。"], url: "https://lingamjiji.com/2025/07/25/48color_35/", imageUrl: "image/48_35.gif" },
+            { id: 36, name: "焦茶", hex: "#442d20", fortune: ["穩如崇嶽根基厚，歲歲安然福運長。", "不逐浮華常守拙，財來水到入高堂。"], url: "https://lingamjiji.com/2025/07/25/48color_36/", imageUrl: "image/48_36.gif" },
+            { id: 37, name: "茶", hex: "#693e1f", fortune: ["一盞清幽舒壽色，半生寧靜得安詳。", "隨緣且慎時機轉，行穩方能路更長。"], url: "https://lingamjiji.com/2025/07/26/48color_37/", imageUrl: "image/48_37.gif" },
+            { id: 38, name: "琥珀", hex: "#cc8903", fortune: ["金光煥彩盈祥氣，凝露千秋鎖瑞春。", "厚德藏鋒多助力，時來運轉福臨門。"], url: "https://lingamjiji.com/2025/07/26/48color_38/", imageUrl: "image/48_38.gif" },
+            { id: 39, name: "赭", hex: "#d57b03", fortune: ["厚土深藏春萬象，巍巍不動見天機。", "勤修自有豐收日，歲歲榮華自在依。"], url: "https://lingamjiji.com/2025/07/26/48color_39/", imageUrl: "image/48_39.gif" },
+            { id: 40, name: "橄欖綠", hex: "#46541d", fortune: ["蒼蒼古木藏幽澗，明月清風悟道聲。", "歲歲不驚秋與夏，青枝翠影鎖繁榮。"], url: "https://lingamjiji.com/2025/07/26/48color_40/", imageUrl: "image/48_40.gif" },
+            { id: 41, name: "孔雀綠", hex: "#095454", fortune: ["翠羽生輝開錦繡，長空瑞氣共天襟。", "心隨流水無窮盡，萬里青雲自可尋。"], url: "https://lingamjiji.com/2025/07/26/48color_41/", imageUrl: "image/48_41.gif" },
             { id: 42, name: "孔雀藍", hex: "#004859", fortune: ["鳳華翩躚開萬象，晴空浩渺見天關。", "心懷皓月凌霄去，步步生蓮上玉山。"], url: "https://lingamjiji.com/2025/07/26/48color_42/", imageUrl: "image/48_42.gif" },
-            { id: 43, name: "靛青", hex: "#4c0082", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-43", imageUrl: "image/48_43.gif" },
-            { id: 44, name: "酒紅", hex: "#591726", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-44", imageUrl: "image/48_44.gif" },
-            { id: 45, name: "白", hex: "#ffffff", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-45", imageUrl: "image/48_45.gif" },
-            { id: 46, name: "銀鼠", hex: "#9a9a9a", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-46", imageUrl: "image/48_46.gif" },
-            { id: 47, name: "鼠", hex: "#5c5c5c", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-47", imageUrl: "image/48_47.gif" },
-            { id: 48, name: "黑", hex: "#000000", fortune: ["秋風拂葉黃金舞，時勢安和運未驚。", "須防細險常謹慎，修德積善化凶生。"], url: "https://your-website.com/color-48", imageUrl: "image/48_48.gif" },
+            { id: 43, name: "靛青", hex: "#4c0082", fortune: ["幽潭映月光寒淡，碧落無聲照萬機。", "潛修靜待時來運，一縷清風入翠微。"], url: "https://lingamjiji.com/2025/07/26/48color_43/", imageUrl: "image/48_43.gif" },
+            { id: 44, name: "酒紅", hex: "#591726", fortune: ["霞染千峰春醉影，流光微動九州天。", "紅塵一夢隨歌盡，倚劍逍遙向遠煙。"], url: "https://lingamjiji.com/2025/07/26/48color_44/", imageUrl: "image/48_44.gif" },
+            { id: 45, name: "白", hex: "#ffffff", fortune: ["皓然明月懸心境，靜極通神萬象新。", "一片冰魂無點染，天風吹雪自清塵。"], url: "https://lingamjiji.com/2025/07/26/48color_45/", imageUrl: "image/48_45.gif" },
+            { id: 46, name: "銀鼠", hex: "#9a9a9a", fortune: ["銀漢微波浮鏡月，流年一瞬夢生花。", "機緣欲動風初起，靜看雲開萬里霞。"], url: "https://lingamjiji.com/2025/07/26/48color_46/", imageUrl: "image/48_46.gif" },
+            { id: 47, name: "鼠", hex: "#5c5c5c", fortune: ["幽隱無聲藏遠策，靜流深水不驚塵。", "萬機浮世須觀變，一動風雷便換新。"], url: "https://lingamjiji.com/2025/07/26/48color_47/", imageUrl: "image/48_47.gif" },
+            { id: 48, name: "黑", hex: "#000000", fortune: ["幽夜長空星閃耀，潛藏光輝待時來。", "若得良機能奮起，步步青雲笑顏開。"], url: "https://lingamjiji.com/2025/07/26/48color_48/", imageUrl: "image/48_48.gif" },
         ];
 
             // --- 程式邏輯區 ---
@@ -271,7 +271,3 @@
     </script>
 </body>
 </html>
-
-
-
-
